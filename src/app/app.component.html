@@ -1,0 +1,10 @@
+<bs-navbar></bs-navbar>
+
+<div class="container">
+  <!-- <agm-map [latitude]='latitude' [longitude]='longitude' [mapTypeId]='mapType'>
+  </agm-map> -->
+  <br />
+  <div [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+</div>

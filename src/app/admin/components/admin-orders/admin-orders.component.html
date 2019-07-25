@@ -1,0 +1,33 @@
+<h2>Orders</h2>
+<ng-container *ngIf="orders$ | async as orders">
+  <div *ngIf='orders.length > 0; then haveOrders; else noOrders;'></div>
+
+  <ng-template #haveOrders>
+    <div class="card" *ngFor="let o of orders">
+      <h5 class="card-header">Date : {{ o.datePlaced | date: 'mediumDate' }}</h5>
+      <div class="card-body">
+        <h5 class="card-title">Name : {{ o.shipping.name }}</h5>
+        <p class="card-text">
+          Address : {{ o.shipping.addressLine1 }}, {{ o.shipping.addressLine2 }}, {{ o.shipping.city}}
+        </p>
+        Items :
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let item of o.items;" class="list-group-item">
+            {{ item.quantity }} x {{ item.product.title }}
+            <div class="float-right">
+              {{ item.totalPrice | currency:'INR' }}
+            </div>
+          </li>
+        </ul>
+        <br />
+        <button class="btn btn-sm btn-warning" (click)="cancleOrder(o)">Cancle Order</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #noOrders>
+    <p>
+      No Orders yet.
+    </p>
+  </ng-template>
+</ng-container>

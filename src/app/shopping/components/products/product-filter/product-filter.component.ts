@@ -1,0 +1,25 @@
+import { fade } from './../../../animations/animations';
+import { CategoryService } from '../../../../shared/services/category.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { slide } from '../../../animations/animations';
+
+@Component({
+  selector: 'product-filter',
+  templateUrl: './product-filter.component.html',
+  styleUrls: ['./product-filter.component.css'],
+  animations: [
+    slide
+  ]
+})
+export class ProductFilterComponent implements OnInit {
+  categories$;
+  @Input('category') category;
+
+  constructor(categoryService: CategoryService) {
+    this.categories$ = categoryService.getAll();
+  }
+
+  ngOnInit() {
+  }
+
+}
